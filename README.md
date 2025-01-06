@@ -2,15 +2,18 @@
 
 1. Clonar el repositorio
 2. Crear un .env basado en el .env.template
-3. Ejecutar `docker-compose up --build`
+3. Inicializar y actualizar Sub-módulos, cuando alguien clona el repositorio por primera vez, debe de ejecutar el siguiente comando para inicializar y actualizar los sub-módulos
+```
+git submodule update --init --recursive
+```
+4. Ejecutar npm i en cada uno de los submodulos
+5. Ejecutar `docker-compose up --build`
 
 ## Para ver mas bonito buscar en la paletta de comando. 
 Open preview
 
 
 ### Pasos para crear los Git Submodules
-
-
 1. Crear un nuevo repositorio en GitHub
 2. Clonar el repositorio en la máquina local
 3. Añadir el submodule, donde `repository_url` es la url del repositorio y `directory_name` es el nombre de la carpeta donde quieres que se guarde el sub-módulo (no debe de existir en el proyecto)
@@ -24,11 +27,8 @@ git add .
 git commit -m "Add submodule"
 git push
 ```
-5. Inicializar y actualizar Sub-módulos, cuando alguien clona el repositorio por primera vez, debe de ejecutar el siguiente comando para inicializar y actualizar los sub-módulos
-```
-git submodule update --init --recursive
-```
-6. Para actualizar las referencias de los sub-módulos
+
+5. Para actualizar las referencias de los sub-módulos
 ```
 git submodule update --remote
 ```
