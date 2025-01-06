@@ -12,6 +12,12 @@ git submodule update --init --recursive
 ## Para ver mas bonito buscar en la paletta de comando. 
 Open preview
 
+## Para crear un nuevo submodulo en el launcher
+1. En github crear un nuvo repository y incluyo el readme porque no se pueden crear repositorios vbacios
+2. crear todo como el paso 3 de `Pasos para crear los Git Submodules` 
+3. Despues borro el readme y para crear dentro de esa carpeta misma un nuevo projecto de nest sin crear otra carpeta hago lo siguiente
+  3.1 Dentro de la carpeta hago ``nest new <nombre_de_la_carpeta> --directory .``
+
 
 ### Pasos para crear los Git Submodules
 1. Crear un nuevo repositorio en GitHub
