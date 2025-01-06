@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+  nats-server:
+    image: nats
+    ports: 
+      - "8222:8222"
+
+  gateway:
+    build: ./gateway
+    ports:
+      - ${GATEWAY_PORT}:3000
+    volumes:
+      - ./gateway/src:/usr/src/app/src
+    command: npm run start:dev
+    #Estas Variables aqui son las que despues debo en mi .env incluir
+    environment:
+      #Esta variable es la que paso a la aplicacion y debe o tiene que ser
+      #el mismo puerto que el del contenedor ose el segundo numero despues del :
+      - PORT=3000
+      - NATS_SERVERS=nats://nats-server:4222, nats://nats-server:4223
+
+  product-ms:
+    build: ./product-ms
+    volumes:
+      - ./product-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      #Aqui no voy a necesitar mas el puerto porque no expondre este microservicio al mundo exterior como un api. Todo sera manejado interno
+      - PORT=3001
+      - NATS_SERVERS=nats://nats-server:4222, nats://nats-server:4223
+      - DATABASE_URL=file:./dev.db
+
+  order-ms:
+    depends_on:
+      - order-db
+    build: ./order-ms
+    volumes:
+      - ./order-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3002
+      - NATS_SERVERS=nats://nats-server:4222, nats://nats-server:4223
+      #Donde esta localhost pongo el nombre de la base de datos (DNS) osea order-db
+      - DATABASE_URL=postgresql://postgres:123456@order-db:5432/orderDB?schema=public
+
+  order-db:
+    container_name: order_database
+    image: postgres:16.2
+    restart: always
+    volumes:
+      - ./order-ms/postgres:/var/lib/postgresql/data
+    #Esta exposicion del puerto solo es encesario aqui para oder leer los datos desde table Plus. En la vida real no expongo ningun puerto
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=orderDB
