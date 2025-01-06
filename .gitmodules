@@ -7,3 +7,6 @@
 [submodule "product-ms"]
 	path = product-ms
 	url = git@github.com:Udemy-MS-Raudel/product-ms.git
+[submodule "auth-ms"]
+	path = auth-ms
+	url = git@github.com:Udemy-MS-Raudel/auth-ms.git
