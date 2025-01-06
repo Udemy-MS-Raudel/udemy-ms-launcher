@@ -1,3 +1,9 @@
 [submodule "gateway"]
 	path = gateway
 	url = git@github.com:Udemy-MS-Raudel/gateway.git
+[submodule "order-ms"]
+	path = order-ms
+	url = git@github.com:Udemy-MS-Raudel/order-ms.git
+[submodule "product-ms"]
+	path = product-ms
+	url = git@github.com:Udemy-MS-Raudel/product-ms.git
