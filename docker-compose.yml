@@ -30,6 +30,8 @@ services:
       #Aqui no voy a necesitar mas el puerto porque no expondre este microservicio al mundo exterior como un api. Todo sera manejado interno
       - PORT=3004
       - NATS_SERVERS=nats://nats-server:4222, nats://nats-server:4223
+      - DATABASE_URL=${MONGO_DATA_BASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
 
   product-ms:
     build: ./product-ms

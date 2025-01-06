@@ -39,6 +39,12 @@ git push
 git submodule update --remote
 ```
 
+## Crear el Auth-MS BD conection con prisma
+
+1. npm install prisma --save-dev
+2. npx prisma init
+3. npx prisma generate
+
 
 ## Importante
 Si se trabaja en el repositorio que tiene los sub-módulos, **primero actualizar y hacer push** en el sub-módulo y **después** en el repositorio principal. 
